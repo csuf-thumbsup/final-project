@@ -19,7 +19,7 @@ def generate_code_str():
             trigger = True
 
     # end - we've parsed and added all necessary code_lines
-    code_str = '\n'.join(code_list)
+    code_str = ''.join(code_list)
     return code_str
 
 if __name__ == '__main__':
