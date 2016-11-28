@@ -28,7 +28,26 @@ if __name__ == '__main__':
     print('\nExecuting generated code...\n')
     exec(code_str)
 
+'''
+OUTPUT
 
+Generated Python code:
+---------
+a1 = 3
 
+b2a = 4
 
+c = 5
 
+print( c )
+
+bal2 = a1 * ( b2a + 2 * c )
+
+print( bal2 )
+---------
+
+Executing generated code...
+
+5
+42
+'''
