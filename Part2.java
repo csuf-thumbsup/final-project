@@ -135,7 +135,7 @@ begin is expected
 program a2016;
 var
 a1 , b2a , c , ba12 : integer ;
-begin
+begin*/
 a1 = 3 ;
 b2a = 4 ;
 c = 5 ;
