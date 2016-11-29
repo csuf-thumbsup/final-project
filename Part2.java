@@ -23,9 +23,8 @@ public class Part2 {
 		}
 		
 		System.out.println();
-
 		
-		if (text.contains("program") && text.contains("var") && text.contains("begin") && text.contains("end.") && text.contains("integer") && text.contains("print")) {
+		if (text.contains("program") && text.contains("var") && text.contains("begin") && text.contains("end.") && text.contains("integer") && text.contains("print") && checkForTerms(text) == true) {
 			System.out.println("No errors");
 		}
 		else if (!text.contains("program")) {
@@ -46,22 +45,10 @@ public class Part2 {
 		else if (!text.contains("print")) {
 			System.out.println("print is expected");
 		}
-		
-		if (!text.contains(";")) {
+		else if (!text.contains(";")) {
 			System.out.println("; is missing");
 		}
-		else if (!text.contains(",")) {
-			System.out.println(", is missing");
-		}
-		else if (!text.contains(".")) {
-			System.out.println(". is missing");
-		}
-		else if (!text.contains(")")) {
-			System.out.println(") is missing");
-		}
-		else if (!text.contains("(")) {
-			System.out.println("( is missing");
-		}
+		
 		System.out.println();
 		
 		in.close();
@@ -76,6 +63,35 @@ public class Part2 {
 		}
 	}
 	
+	public static boolean checkForTerms(String text) {
+		if (!text.contains("/*") && text.contains("*/")) {
+			System.out.println("/* is missing");
+			return false;
+		}
+		else if (text.contains("/*") && !text.contains("*/")) {
+			System.out.println("*/ is missing");
+			return false;
+		}
+		else if (!text.contains(",")) {
+			System.out.println(", is missing");
+			return false;
+		}
+		else if (!text.contains(".")) {
+			System.out.println(". is missing");
+			return false;
+		}
+		else if (!text.contains(")")) {
+			System.out.println(") is missing");
+			return false;
+		}
+		else if (!text.contains("(")) {
+			System.out.println("( is missing");
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 	public boolean isIdentifier(String text) {
 		if (text.contains("var")) {
 			return true;
@@ -115,4 +131,19 @@ print ( ba12 ) ;
 end.
 
 begin is expected
+
+program a2016;
+var
+a1 , b2a , c , ba12 : integer ;
+begin
+a1 = 3 ;
+b2a = 4 ;
+c = 5 ;
+print ( c ) ;
+ba12 = a1 * ( b2a + 2 * c ) ;
+print ( ba12 ) ;
+end.
+
+'/*' is missing
+
 */
