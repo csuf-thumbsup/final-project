@@ -24,29 +24,26 @@ public class Part2 {
 		
 		System.out.println();
 		
-		if (text.contains("program") && text.contains("var") && text.contains("begin") && text.contains("end.") && text.contains("integer") && text.contains("print") && checkForTerms(text) == true) {
+		if (text.contains("program") && text.contains("var") && text.contains("begin") && text.contains("end.") && text.contains("integer") && checkForTerms(text) == true) {
 			System.out.println("No errors");
 		}
-		else if (!text.contains("program")) {
+		if (!text.contains("program")) {
 			System.out.println("program is expected");
 		}
-		else if (!text.contains("var")) {
+		if (!text.contains("var")) {
 			System.out.println("var is expected");
 		}
-		else if (!text.contains("begin")) {
+		if (!text.contains("begin")) {
 			System.out.println("begin is expected");
 		}
-		else if (!text.contains("end.")) {
+		if (!text.contains("end.")) {
 			System.out.println("end. is expected");
 		}
-		else if (!text.contains("integer")) {
+		if (!text.contains("integer")) {
 			System.out.println("integer is expected");
 		}
-		else if (!text.contains("print")) {
+		if (!text.contains("print")) {
 			System.out.println("print is expected");
-		}
-		else if (!text.contains(";")) {
-			System.out.println("; is missing");
 		}
 		
 		System.out.println();
@@ -64,15 +61,7 @@ public class Part2 {
 	}
 	
 	public static boolean checkForTerms(String text) {
-		if (!text.contains("/*") && text.contains("*/")) {
-			System.out.println("/* is missing");
-			return false;
-		}
-		else if (text.contains("/*") && !text.contains("*/")) {
-			System.out.println("*/ is missing");
-			return false;
-		}
-		else if (!text.contains(",")) {
+		if (!text.contains(",")) {
 			System.out.println(", is missing");
 			return false;
 		}
@@ -131,19 +120,4 @@ print ( ba12 ) ;
 end.
 
 begin is expected
-
-program a2016;
-var
-a1 , b2a , c , ba12 : integer ;
-begin*/
-a1 = 3 ;
-b2a = 4 ;
-c = 5 ;
-print ( c ) ;
-ba12 = a1 * ( b2a + 2 * c ) ;
-print ( ba12 ) ;
-end.
-
-'/*' is missing
-
 */
