@@ -50,7 +50,20 @@ public class Part1 {
 		}
 		
 		return false;
-	}
-	
-	
+	}	
 }
+
+/* Output:
+program a2016;
+var
+a1 ,  b2a,  c, bal2 : integer ;
+begin
+a1    =3 ;
+b2a=  4;
+c   = 5  ;
+
+bal2=al * (b2a+2*c)   ;
+end.
+
+print is expected
+*/
