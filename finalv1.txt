@@ -11,6 +11,6 @@ program a2016;
     print( c ); /* display c */
     
       /* compute the value of the expression */
-      bal2=al * (b2a+2*c)   ;
+      bal2=a1 * (b2a+2*c)   ;
       print(bal2  ); /* print the value of bal2*/
     end.
