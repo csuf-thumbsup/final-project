@@ -9,13 +9,13 @@ def remove_comments(input_str):
     return no_comments_str
 
 def format_item(item):
-    item_list = re.split('(,|:|=|print\(|\(|\))', item)
+    item_list = re.split('(,|:|=|print\(|\(|\))', item) # break item into list by [, :, =, print(, (, )]keywords/delimeters
 
     item_list = [item.strip() for item in item_list] # strip excess whitespace from each item
 
     item_list = [item for item in item_list if item] # remove empty items from list
 
-    formatted_item = ' '.join(item_list)
+    formatted_item = ' '.join(item_list) # rejoin list as str with a space in between each item
 
     return formatted_item
 
