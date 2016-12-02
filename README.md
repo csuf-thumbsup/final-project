@@ -19,7 +19,7 @@ and then we can create a batch file or shell script (whatever OS the Professor i
 
 --
 
-Current Batch file:
+Current Shell Script file:
 
     #!/bin/bash
     python Part1.py &&
