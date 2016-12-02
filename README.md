@@ -19,7 +19,9 @@ and then we can create a batch file or shell script (whatever OS the Professor i
 
 --
 
-Example Batch file:
-    
-    g++ Part1.program && java Part2.program && python Part3.program
+Current Batch file:
 
+    #!/bin/bash
+    python Part1.py &&
+    java -jar Part2.jar &&
+    python Part3.py
