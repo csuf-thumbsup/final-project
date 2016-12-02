@@ -23,11 +23,14 @@ def generate_code_str():
     return code_str
 
 if __name__ == '__main__':
+
+    print('\n--------------Executing Part 3-----------------\n')
+
     code_str = generate_code_str()
     print('Generated Python code:\n---------\n' + code_str + '---------')
     print('\nExecuting generated code...\n')
     exec(code_str)
-
+    print('\n')
 '''
 OUTPUT
 

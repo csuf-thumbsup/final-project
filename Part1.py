@@ -47,6 +47,9 @@ def beautify(filename):
     return beautify_str
 
 if __name__ == '__main__':
+
+    print('\n--------------Executing Part 1-----------------\n')
+
     beautify_str = beautify('finalv1.txt')
     print('**********Beautified String**********\n' + beautify_str)
 
