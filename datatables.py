@@ -3752,7 +3752,57 @@ lr_table = {
     },
 }
 
+cfg_table = {
+        '1': {'lhs': 'A', 'length': 8}, # 1) A -> program B ; var D begin G end.
+        '2': {'lhs': 'B', 'length': 2}, # 2) B -> R C
+        '3': {'lhs': 'B', 'length': 1}, # 3) B -> R
+        '4': {'lhs': 'C', 'length': 2}, # 4) C -> Q C
+        '5': {'lhs': 'C', 'length': 2}, # 5) C -> R C
+        '6': {'lhs': 'C', 'length': 1}, # 6) C -> Q
+        '7': {'lhs': 'C', 'length': 1}, # 7) C -> R
+        '8': {'lhs': 'D', 'length': 4}, # 8) D -> E : F ;
+        '9': {'lhs': 'E', 'length': 3}, # 9) E -> B , E
+        '10': {'lhs': 'E', 'length': 1}, # 10) E -> B
+        '11': {'lhs': 'F', 'length': 1}, # 11) F -> integer
+        '12': {'lhs': 'G', 'length': 1}, # 12) G -> H
+        '13': {'lhs': 'G', 'length': 2}, # 13) G -> H G
+        '14': {'lhs': 'H', 'length': 1}, # 14) H -> I
+        '15': {'lhs': 'H', 'length': 1}, # 15) H -> J
+        '16': {'lhs': 'I', 'length': 5}, # 16) I -> print ( B ) ;
+        '17': {'lhs': 'J', 'length': 4}, # 17) J -> B = K ;
+        '18': {'lhs': 'K', 'length': 1}, # 18) K -> L
+        '19': {'lhs': 'K', 'length': 3}, # 19) K -> L + K
+        '20': {'lhs': 'K', 'length': 3}, # 20) K -> L - K
+        '21': {'lhs': 'L', 'length': 3}, # 21) L -> L * M
+        '22': {'lhs': 'L', 'length': 3}, # 22) L -> L / M
+        '23': {'lhs': 'L', 'length': 1}, # 23) L -> M
+        '24': {'lhs': 'M', 'length': 1}, # 24) M -> B
+        '25': {'lhs': 'M', 'length': 1}, # 25) M -> N
+        '26': {'lhs': 'M', 'length': 3}, # 26) M -> ( K )
+        '27': {'lhs': 'N', 'length': 3}, # 27) N -> O Q P
+        '28': {'lhs': 'N', 'length': 2}, # 28) N -> Q P
+        '29': {'lhs': 'N', 'length': 2}, # 29) N -> O Q
+        '30': {'lhs': 'N', 'length': 1}, # 30) N -> Q
+        '31': {'lhs': 'O', 'length': 1}, # 31) O -> +
+        '32': {'lhs': 'O', 'length': 1}, # 32) O -> -
+        '33': {'lhs': 'P', 'length': 2}, # 33) P -> Q P
+        '34': {'lhs': 'P', 'length': 1}, # 34) P -> Q
+        '35': {'lhs': 'Q', 'length': 1}, # 35) Q -> 0
+        '36': {'lhs': 'Q', 'length': 1}, # 36) Q -> 1
+        '37': {'lhs': 'Q', 'length': 1}, # 37) Q -> 2
+        '38': {'lhs': 'Q', 'length': 1}, # 38) Q -> 3
+        '39': {'lhs': 'Q', 'length': 1}, # 39) Q -> 4
+        '40': {'lhs': 'Q', 'length': 1}, # 40) Q -> 5
+        '41': {'lhs': 'Q', 'length': 1}, # 41) Q -> 6
+        '42': {'lhs': 'Q', 'length': 1}, # 42) Q -> 7
+        '43': {'lhs': 'Q', 'length': 1}, # 43) Q -> 8
+        '44': {'lhs': 'Q', 'length': 1}, # 44) Q -> 9
+        '45': {'lhs': 'R', 'length': 1}, # 45) R -> a
+        '46': {'lhs': 'R', 'length': 1}, # 46) R -> b
+        '47': {'lhs': 'R', 'length': 1}, # 47) R -> c
+}
 
+'''
 cfg_table = [
         {'lhs': 'A', 'length': 8}, # 1) A -> program B ; var D begin G end.
         {'lhs': 'B', 'length': 2}, # 2) B -> R C
@@ -3802,3 +3852,4 @@ cfg_table = [
         {'lhs': 'R', 'length': 1}, # 46) R -> b
         {'lhs': 'R', 'length': 1}, # 47) R -> c
 ]
+'''

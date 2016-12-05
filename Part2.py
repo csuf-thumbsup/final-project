@@ -28,7 +28,7 @@ def run_parser(parsing_table, cfg_table, input_list):
 
     i = 0 # index for str_list
     read_char = str_list[0] # init read_char to first char
-    valid_input = ''
+    valid_input = read_char
     temp_iter = 1
 
     while(True):
@@ -59,7 +59,9 @@ def run_parser(parsing_table, cfg_table, input_list):
             stack.append(popped_char)
 
             # get the rule defined by its index (temp_parsed_value[1]) e.g R8 => Rule #8 in CFG
-            rule_dict = cfg_table[ int(temp_parsed_value[1:])-1 ] # convert to int and subtract by 1 to account for 0-indexing
+            #cfg_index = int(temp_parsed_value[1:])-1 # convert to int and subtract by 1 to account for 0-indexing
+            cfg_index = temp_parsed_value[1:]
+            rule_dict = cfg_table[cfg_index]
 
             # pop the stack amount of 2*Length of the RHS
             for x in range(0, 2*rule_dict['length']):
@@ -69,7 +71,7 @@ def run_parser(parsing_table, cfg_table, input_list):
 
             # update read_char to the LHS of our rule
             read_char = rule_dict['lhs']
-            print('CFG Rule #' + str(int(temp_parsed_value[1:])-1) + ' dict: '  + str(rule_dict))
+            print('CFG Rule #' + str(cfg_index) + ' dict: '  + str(rule_dict))
 
 
         elif temp_parsed_value == 'undef':
@@ -98,6 +100,7 @@ if __name__ == '__main__':
 
     print('Parsing File...')
     run_parser(lr_table, cfg_table, file_str_list)
+    #print(str(45-1) + ': ' + cfg_table[45-1].__str__())
 
 '''
 program a 2 0 1 6 ; var a 1 , b 2 a , c , b a 1 2 : integer ; begin a 1 = 3 ; b 2 a = 4 ; c = 5 ; print ( c ) ; b a 1 2 = a 1 * ( b 2 a + 2 * c ) ; print ( b a 1 2 ) ; end.
