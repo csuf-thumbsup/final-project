@@ -1,5 +1,23 @@
+def prep_file_list(filename):
+    non_terminals = ['program', ';', 'var', 'begin', 'end.', ':', ',', 'integer', 'print', '+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
+    filelines = open(filename).readlines()
+    file_str = ' '.join(line.strip() for line in filelines)
+
+    file_list = file_str.split()
+    new_file_list = []
+    for word in file_list:
+        if word in non_terminals:
+            new_file_list.append(word)
+        elif word == 'print(':
+            # special case for print(
+            new_file_list.extend(['print', '('])
+        else:
+            new_file_list.extend(list(word))
+
+    return new_file_list
+
 def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
-    str_list = list(input_str)
+    str_list = input_str
     stack = ['$', starting_non_terminal] # initialize stack to $ and the starting non-terminal
 
     i = 0
@@ -813,12 +831,11 @@ if __name__ == '__main__':
             '$': 'undef'
             }
         }
+
     terminals_1 = ['program', ';', 'var', 'begin', 'end.', ':', ',', 'integer', 'print', '+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
-    input_strs_1 = ['program a 2 0 1 6 ; var a 1 , b 2 a , c , b a 1 2 : integer ; begin a 1 = 3 ; b 2 a = 4 ; c = 5 ; print ( c ) ; b a 1 2 = a 1 * ( b 2 a + 2 * c ) ; print ( b a 1 2 ) ; end.']
+    input_strs_1 = prep_file_list('finalv2.txt')
     starting_non_terminal_1 = 'A'
 
-
     print('Parsing Problem')
-    for curr_str in input_strs_1:
-        print('\nResults for ' + curr_str + ': ')
-        run_parser(parsing_table_1, curr_str, terminals_1, starting_non_terminal_1)
+
+    run_parser(parsing_table_1, input_strs_1, terminals_1, starting_non_terminal_1)
