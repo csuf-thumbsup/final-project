@@ -28,7 +28,7 @@ def run_parser(parsing_table, cfg_table, input_list):
 
     i = 0 # index for str_list
     read_char = str_list[0] # init read_char to first char
-
+    valid_input = ''
     temp_iter = 1
 
     while(True):
@@ -51,6 +51,7 @@ def run_parser(parsing_table, cfg_table, input_list):
 
             i += 1 # increment our index for str_list
             read_char = str_list[i] # update read_char
+            valid_input += read_char
 
         # if our value is R#
         elif temp_parsed_value[0] == 'R':
@@ -90,6 +91,7 @@ def run_parser(parsing_table, cfg_table, input_list):
             read_char = str_list[i]
 
         temp_iter += 1
+        print('Valid input: ' + valid_input)
 
 if __name__ == '__main__':
     file_str_list = prep_file_list('finalv2.txt')
