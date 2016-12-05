@@ -19,18 +19,20 @@ def prep_file_list(filename):
         else:
             new_file_list.extend(list(word))
 
-    print(new_file_list)
     return new_file_list
 
-def run_parser(parsing_table, cfg_table, input_str):
-    str_list = input_str
+def run_parser(parsing_table, cfg_table, input_list):
+    str_list = input_list
 
     stack = ['0'] # init stack to 0
 
     i = 0 # index for str_list
     read_char = str_list[0] # init read_char to first char
 
+    temp_iter = 1
+
     while(True):
+        print('\n-----Iteration #' + str(temp_iter) + '-----\n')
 
         # pop the stack on every iteration and store into popped_char
         popped_char = stack.pop()
@@ -71,11 +73,11 @@ def run_parser(parsing_table, cfg_table, input_str):
 
         elif temp_parsed_value == 'undef':
             # printing our failed match
-            print('\n************\nFail!' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + '\tstack: ' + stack.__str__())
-            print('Your string is NOT valid for the given language!:', input_str)
+            print('************\nFail!' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + '\tstack: ' + stack.__str__())
+            print('************\n\nYour string is NOT valid for the given language!:')#, input_list)
             return
         elif temp_parsed_value == 'ACCEPT':
-            print('Your string IS valid for the given language!:', input_str)
+            print('Your string IS valid for the given language!:', input_list)
             return
 
         # else our value is a number
@@ -86,6 +88,8 @@ def run_parser(parsing_table, cfg_table, input_str):
             print('NUMBER:' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + '\tstack: ' + stack.__str__())
             # update read_char to the current char
             read_char = str_list[i]
+
+        temp_iter += 1
 
 if __name__ == '__main__':
     file_str_list = prep_file_list('finalv2.txt')
