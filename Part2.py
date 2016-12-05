@@ -47,7 +47,7 @@ def run_parser(parsing_table, cfg_table, input_list):
             stack.extend([popped_char, read_char, temp_parsed_value[1:]]) # temp_parsed_value[1:] accounts for digits like 14 (use of string slicing)
 
             # printing our matches for every instance of a read/accepted char
-            print('Match!' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + '\tstack: ' + stack.__str__())
+            print('Match!' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + ' Action: ' + temp_parsed_value + '\tstack: ' + stack.__str__())
 
             i += 1 # increment our index for str_list
             read_char = str_list[i] # update read_char
@@ -67,17 +67,17 @@ def run_parser(parsing_table, cfg_table, input_list):
             for x in range(0, 2*rule_dict['length']):
                 stack.pop()
 
-            print('RVALUE:' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + '\tstack: ' + stack.__str__())
+            print('RVALUE:' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + ' Action: ' + temp_parsed_value + '\tstack: ' + stack.__str__())
 
             # update read_char to the LHS of our rule
             read_char = rule_dict['lhs']
-            print('CFG Rule #' + str(cfg_index) + ' dict: '  + str(rule_dict))
+            #print('CFG Rule #' + str(cfg_index) + ' dict: '  + str(rule_dict))
 
 
         elif temp_parsed_value == 'undef':
             # printing our failed match
-            print('************\nFail!' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + '\tstack: ' + stack.__str__())
-            print('************\n\nYour string is NOT valid for the given language!:')#, input_list)
+            print('************\nFail!' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + ' Action: ' + temp_parsed_value + '\tstack: ' + stack.__str__())
+            print('************\n\nYour string is NOT valid for the given language!:\n'+ input_list.__str__())
             return
         elif temp_parsed_value == 'ACCEPT':
             print('Your string IS valid for the given language!:', input_list)
@@ -88,7 +88,7 @@ def run_parser(parsing_table, cfg_table, input_list):
             # append our 3 values to the stack
             stack.extend([popped_char, read_char, temp_parsed_value])
 
-            print('NUMBER:' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + '\tstack: ' + stack.__str__())
+            print('NUMBER:' + '\tpopped_char: ' + popped_char + '\tread_char: ' + read_char + ' Action: ' + temp_parsed_value + '\tstack: ' + stack.__str__())
             # update read_char to the current char
             read_char = str_list[i]
 
@@ -100,7 +100,6 @@ if __name__ == '__main__':
 
     print('Parsing File...')
     run_parser(lr_table, cfg_table, file_str_list)
-    #print(str(45-1) + ': ' + cfg_table[45-1].__str__())
 
 '''
 program a 2 0 1 6 ; var a 1 , b 2 a , c , b a 1 2 : integer ; begin a 1 = 3 ; b 2 a = 4 ; c = 5 ; print ( c ) ; b a 1 2 = a 1 * ( b 2 a + 2 * c ) ; print ( b a 1 2 ) ; end.
