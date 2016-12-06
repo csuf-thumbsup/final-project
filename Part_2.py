@@ -26,7 +26,8 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
     i = 0
     read_char = str_list[i] # init read_char to first char
 
-    temp_index = 1
+    temp_index = 2
+    accepted_input = read_char
 
     while(True):
 
@@ -42,6 +43,7 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
             print('match: ' + popped_char + '\tstack: '+ stack.__str__())
             i = i + 1
             read_char = str_list[i]
+            accepted_input += read_char
             continue
         elif popped_char == '$':
             # check for end of string. If we got here then you're good to go!
@@ -59,8 +61,8 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
 
         # our checks and balances
         if temp_parsed_value == 'undef':
-            print('Your string is NOT valid for the given language!:', input_str)
-            return;
+            print('\nYour string is NOT valid for the given language!:')#, input_str)
+            return
         elif temp_parsed_value == 'lambda':
             # skip and loop back to top
             continue
@@ -82,6 +84,7 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
             '''
 
         temp_index += 1
+        print('Accepted Input:  ' +  accepted_input)
 
 if __name__ == '__main__':
 
