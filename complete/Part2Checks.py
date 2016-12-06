@@ -40,8 +40,12 @@ def checkForUndefinedVariables(input_list, terminals_list):
 
     for word in word_list:
         if word not in valid_list:
-            print(word + ' is an Unkown Identifier.\n')
-            exit(1)
+            # its possible its not a valid word but is it a valid integer?
+            if word.isdigit():
+                continue
+            else:
+                print(word + ' is an Unkown Identifier.\n')
+                exit(1)
 
 def checkForMissingSemiColons():
     filelines = open('finalv2.txt').readlines()
