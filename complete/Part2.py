@@ -70,7 +70,7 @@ def run_parser(parsing_table, input_list, terminals, starting_non_terminal):
         # our checks and balances
         if temp_parsed_value == 'undef':
             print('\nYour string is NOT valid for the given language!:', input_list.__str__())
-            return
+            exit(1)
         elif temp_parsed_value == 'lambda':
             temp_index += 1
             # skip and loop back to top
@@ -84,13 +84,6 @@ def run_parser(parsing_table, input_list, terminals, starting_non_terminal):
 
             reversed_list = value_list[::-1]
             stack.extend(reversed_list)
-
-            '''
-            reversed_value = temp_parsed_value[::-1]
-            for x in reversed_value:
-                # push the values in reverse order
-                stack.append(x)
-            '''
 
         temp_index += 1
         print('Accepted Input:  ' +  accepted_input)
