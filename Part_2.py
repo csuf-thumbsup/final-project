@@ -1,7 +1,7 @@
 from datatables_1 import parsing_table
 
 def prep_file_list(filename):
-    non_terminals = ['program', ';', 'var', 'begin', 'end.', ':', ',', 'integer', 'print', '+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
+    non_terminals = ['$', 'program', ';', 'var', 'begin', 'end.', ':', ',', 'integer', 'print', '+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
     filelines = open(filename).readlines()
     file_str = ' '.join(line.strip() for line in filelines)
 
@@ -15,11 +15,11 @@ def prep_file_list(filename):
             new_file_list.extend(['print', '('])
         else:
             new_file_list.extend(list(word))
-
+    new_file_list.append('$') # append $
     print('File List: ' + new_file_list.__str__() + '\n')
     return new_file_list
 
-def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
+def run_parser(parsing_table, input_str, terminals, starting_non_terminal):
     str_list = input_str
     stack = ['$', starting_non_terminal] # initialize stack to $ and the starting non-terminal
 
@@ -42,19 +42,31 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
             # we found a match
             print('match: ' + popped_char + '\tstack: '+ stack.__str__())
             i = i + 1
+            print('i: ' + str(i))
             read_char = str_list[i]
+            print('read_char: ' + read_char)
             accepted_input += read_char
+            temp_index += 1
             continue
+            '''
+        elif popped_char == 'end.':
+            if stack[0] == '$':
+                print('ACCEPTED.')
+                print('stack: []')
+                exit(0)
+            else:
+                print('NOOOOOOO')
+            '''
         elif popped_char == '$':
             # check for end of string. If we got here then you're good to go!
             print('match: ' + popped_char + '\tstack: ' + stack.__str__())
             print('Your string IS valid:', input_str)
-            exit()
+            exit(0)
 
         print('----Values----')
         print('popped_char: ' + popped_char + '\tread_char: ' + read_char)
         # find [popped_char, read_char] in our parsing_table_1
-        temp_parsed_value = parsing_table_1[popped_char][read_char]
+        temp_parsed_value = parsing_table[popped_char][read_char]
 
         print('----Grabbing val from parsing_table----')
         print('parsing_table_1[' + popped_char + '][' + read_char +']' + ' = ' + temp_parsed_value)
@@ -64,6 +76,7 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
             print('\nYour string is NOT valid for the given language!:')#, input_str)
             return
         elif temp_parsed_value == 'lambda':
+            temp_index += 1
             # skip and loop back to top
             continue
         else:
@@ -88,9 +101,11 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
 
 if __name__ == '__main__':
 
-    terminals = ['program', ';', 'var', 'begin', 'end.', ':', ',', 'integer', 'print', '=', '+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
+    terminals = ['program', ';', 'var', 'begin', ':', ',', 'integer', 'end.', 'print', '=', '+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
     input = prep_file_list('finalv2.txt')
     starting_non_terminal = 'A'
+
+    print('LEN: ' + str(len(terminals)))
 
     print('Attempting to Parse...')
 
