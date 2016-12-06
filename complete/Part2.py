@@ -44,37 +44,32 @@ def run_parser(parsing_table, input_list, terminals, starting_non_terminal):
         # immediate check if the popped_char is a terminal
         if popped_char in terminals:
             # we found a match
-            print('match: ' + popped_char + '\tstack: '+ stack.__str__())
+            print('MATCH: ' + popped_char)
             i = i + 1
-            print('i: ' + str(i))
             read_char = str_list[i]
-            print('read_char: ' + read_char)
             accepted_input += read_char
             temp_index += 1
             continue
 
         elif popped_char == '$':
             # check for end of string. If we got here then you're good to go!
-            print('match: ' + popped_char + '\tstack: ' + stack.__str__())
+            print('MATCH: ' + popped_char)
             print('Your string IS valid: ' + input_list.__str__())
             exit(0)
 
-        print('----Values----')
         print('popped_char: ' + popped_char + '\tread_char: ' + read_char)
         # find [popped_char, read_char] in our parsing_table_1
         try:
             temp_parsed_value = parsing_table[popped_char][read_char]
         except KeyError:
-            print('\n\nSOME ERROR!!!!!!!!')
-            return
+            print('\n\n*****ERROR Accessing Parsing Table*****')
+            exit(1)
 
-        print('----Grabbing val from parsing_table----')
         print('parsing_table[ ' + popped_char + ' ][ ' + read_char +' ] ' + ' = ' + temp_parsed_value)
 
         # our checks and balances
         if temp_parsed_value == 'undef':
             print('\nYour string is NOT valid for the given language!:', input_list.__str__())
-            find_errors()
             return
         elif temp_parsed_value == 'lambda':
             temp_index += 1
@@ -111,6 +106,8 @@ if __name__ == '__main__':
     #------ PRE-CHECKS ---------------------------
     preCheckInput = prep_file_list('finalv2.txt', False)
 
+    ck.checkForPrintMisspelling(preCheckInput)
+
     ck.checkForPeriod(preCheckInput)
 
     ck.checkForKeywords(preCheckInput, keywords)
@@ -119,7 +116,9 @@ if __name__ == '__main__':
 
     ck.checkForMissingSemiColons()
 
-    exit()
+    ck.checkForMissingCommas(preCheckInput)
+
+    ck.checkForParentheses(preCheckInput)
 
     #------ PARSING ------------------------------
     print('Attempting to Parse...')
