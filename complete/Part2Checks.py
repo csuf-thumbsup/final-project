@@ -90,7 +90,7 @@ def checkForParentheses(input_list):
         if word == '(':
             if triggered_parentheses:
                 # we found another left parantheses without finding a right one first
-                print('Right parantheses is missing.')
+                print(') is missing.')
                 exit(1)
             else:
                 triggered_parentheses = True
@@ -101,5 +101,5 @@ def checkForParentheses(input_list):
                 triggered_parentheses = False
             else:
                 # we found another right parantheses without finding a left one first
-                print('Left Parentheses is missing.')
+                print('( is missing.')
                 exit(1)
