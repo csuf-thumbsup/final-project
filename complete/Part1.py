@@ -1,48 +1,52 @@
 import re
 
-def remove_comments(input_str):
-    pattern = re.compile('\/\*' + '(.*?)' + '\*\/') # pattern: /* (anything in between) */
+def remove_comments(input_list):
+    pattern = re.compile('\/\*' + '(.*?)' + '\*\/')  # pattern: /* (anything in between) */
 
-    # replace all comment matches with nothing
-    no_comments_str = re.sub(pattern, '' ,input_str)
+    new_list = []
+    # removing comments from list
+    multi_line_comment_flag = False
+    for line in input_list:
+        # immediate check if its a one-liner comment
+        if line[0:2] == '/*' and line[-2:] == '*/':
+            continue
+        elif line[0:2] == '/*':
+            multi_line_comment_flag = True
+        elif multi_line_comment_flag:
+            # check if we are at the end of the comment
+            if line[-2:] == '*/':
+                multi_line_comment_flag = False
+            else:
+                continue
+        else:
+            # append our line and remove any embedded comments in the line
+            if line:
+                # we skip empty elements and strip excess whitespace again just in case
+                new_list.append(re.sub(pattern, '' ,line).strip())
 
-    return no_comments_str
+    return new_list
 
 def format_item(item):
-    item_list = re.split('(,|\+|\*|:|=|print\(|\(|\))', item) # break item into list by [, :, =, print(, (, )]keywords/delimeters
+    item_list = re.split('(,|\+|\*|:|;|=|print\(|\(|\))', item) # break item into list by [, :, =, print(, (, )]keywords/delimeters
 
     item_list = [item.strip() for item in item_list] # strip excess whitespace from each item
 
     item_list = [item for item in item_list if item] # remove empty items from list
 
-    formatted_item = ' '.join(item_list) # rejoin list as str with a space in between each item
-
-    return formatted_item
+    return item_list
 
 def beautify(filename):
-    filestr =  ''.join(open(filename).readlines()).replace('\n', '') # join file list items together to form 1 string
+    filelines = [line.strip() for line in open(filename).readlines()] # split into lines and strip excess whitespace
 
-    filestr = remove_comments(filestr)
-
-    filelist = re.split('(;|var|begin|end\.)', filestr) # split filestr into a list by [var, begin, end, ;] keywords/delimeters
-
-    filelist = [item.strip() for item in filelist] # strip excess whitespace from each item
-
-    filelist = [item for item in filelist if item] # remove empty items from list
+    filelines = remove_comments(filelines)
 
     beautify_list = []
 
-    for item in filelist:
-        if item.startswith('program') or item.startswith('begin') or item.startswith('var') or item.startswith('end.'):
-            beautify_list.append( (' '.join(subitem.strip() for subitem in re.split('\s+', item))) ) # split token then rejoin by 1 space and append to beautify_list
-        elif item.startswith(';'):
-            beautify_list.append(' ;') # special case for semi-colons
-        else:
-            beautify_list.append(format_item(item)) # format then append to beautify_list
+    for line in filelines:
+        formatted_line = ' '.join(format_item(line)).strip()
+        beautify_list.append(formatted_line)
 
-    beautify_list = [re.sub('(;|var|begin|end\.)', r'\1\n', item) for item in beautify_list] # add a newline to [var, begin, end, ;] keywords/delimeters
-
-    beautify_str = ''.join(beautify_list) # joining list together to a string
+    beautify_str = '\n'.join(beautify_list) # joining list together to a string
 
     return beautify_str
 
@@ -53,7 +57,7 @@ if __name__ == '__main__':
     beautify_str = beautify('finalv1.txt')
     print('**********Beautified String**********\n' + beautify_str)
 
-    print('Saving Beautified String to file: finalv2.txt')
+    print('\nSaving Beautified String to file: finalv2.txt')
     with open('finalv2.txt', 'w+') as file:
         file.write(beautify_str)
 
