@@ -49,7 +49,7 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
             # check for end of string. If we got here then you're good to go!
             print('match: ' + popped_char + '\tstack: ' + stack.__str__())
             print('Your string IS valid:', input_str)
-            return;
+            exit()
 
         print('----Values----')
         print('popped_char: ' + popped_char + '\tread_char: ' + read_char)
@@ -88,7 +88,7 @@ def run_parser(parsing_table_1, input_str, terminals, starting_non_terminal):
 
 if __name__ == '__main__':
 
-    terminals = ['program', ';', 'var', 'begin', 'end.', ':', ',', 'integer', 'print', '+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
+    terminals = ['program', ';', 'var', 'begin', 'end.', ':', ',', 'integer', 'print', '=', '+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c']
     input = prep_file_list('finalv2.txt')
     starting_non_terminal = 'A'
 
