@@ -1,11 +1,15 @@
 def checkForPrintMisspelling(input_list):
+    print(input_list)
     for word in input_list:
-        # the way input_list is formatted then a misspelled "print" will still have left parantheses next to it
-        # e.g. pabct(
-        if len(word) == 6 and word[0] == 'p' and word[-2] == 't' and word[-1] == '(':
-            # we definitely know this word is misspelled from the input_list
-            print('print is misspelled.')
-            exit(1)
+        if len(word) == 5 and word[0] == 'p' and word[-1] == 't':
+            # immediate check if its spelled correctly
+            if word == 'print':
+                continue
+            else:
+                # we definitely know this word is misspelled
+                # e.g. pabct, prnit, or passt
+                print('print is misspelled.')
+                exit(1)
 
 def checkForPeriod(input_list):
     last_word = input_list[-1]

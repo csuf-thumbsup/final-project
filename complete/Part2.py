@@ -62,7 +62,8 @@ def run_parser(parsing_table, input_list, terminals, starting_non_terminal):
         try:
             temp_parsed_value = parsing_table[popped_char][read_char]
         except KeyError:
-            print('\n\n*****ERROR Accessing Parsing Table*****')
+            print('\n\n*****Error Accessing Parsing Table*****')
+            print('read_char: ' + read_char + ' is not a valid word for the given language.')
             exit(1)
 
         print('parsing_table[ ' + popped_char + ' ][ ' + read_char +' ] ' + ' = ' + temp_parsed_value)
